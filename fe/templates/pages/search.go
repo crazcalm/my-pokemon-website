@@ -1,6 +1,8 @@
 package pages
 
 import (
+	"bytes"
+	"fmt"
 	"html/template"
 	"log"
 
@@ -20,8 +22,10 @@ const(
 `
 
 	searchPageBody = `
-	<h2>{{.Body.Text}}</h2>
-	`
+<body>
+  <h2>{{.Text}}</h2>
+</body>
+`
 )
 
 // BodyContent will be used to populate the body of the SearchPage template
@@ -36,33 +40,30 @@ type SearchPageContent struct {
 	Footer tmpl.FooterContent
 }
 
-// GetSearchPageContent creates a SearchPageContent to be used in the SearchPage template
-func getSearchPageContent() SearchPageContent {
-	return 	SearchPageContent{tmpl.GetHeadContent("", []string{}, []string{}), BodyContent{"Hello World"}, tmpl.GetFooterContent("", []tmpl.ImageLink{})}
-	
-}
+// GetSearchPage compiles the SearchPage html into a string
+func GetSearchPage() (string){
+	page := new(bytes.Buffer)
+	fmt.Fprintf(page, "<html lang=\"en\">\n")
 
-// GetSearchPage returns the search page template
-func GetSearchPage() (*template.Template, SearchPageContent){
-	page, err := template.New("SearchPage").Parse(tmpl.Head)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	_, err = page.New("Head").Parse(tmpl.Head)
+	head := template.Must(template.New("Head").Parse(tmpl.Head))
+	err := head.Execute(page, tmpl.GetHeadContent("", []string{}, []string{}))
 	if err != nil {
 		log.Fatal(err)
 	}
 	
-	_, err = page.New("Footer").Parse(tmpl.Footer)
+	body := template.Must(template.New("Body").Parse(searchPageBody))
+	err = body.Execute(page, BodyContent{"Hello World"})
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	_, err = page.New("Body").Parse(searchPageBody)
+	footer := template.Must(template.New("Footer").Parse(tmpl.Footer))
+	err = footer.Execute(page, tmpl.GetFooterContent("", []tmpl.ImageLink{}))
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	return page, getSearchPageContent()
+	fmt.Fprintf(page, "\n</html>")
+
+	return page.String()
 }

@@ -9,9 +9,13 @@ const (
 	Head = `<head>
 <title>{{.Title}}</title>
 
-{{range .JS}}<script type="text/javascript" src="{{.}}"></script>{{end}}
+{{range .JS}}
+<script type="text/javascript" src="{{.}}"></script>
+{{end}}
 
-{{range .CSS}}<link rel="stylesheet" type="text/css" href="{{.}}">{{end}}
+{{range .CSS}}
+<link rel="stylesheet" type="text/css" href="{{.}}">
+{{end}}
 
 </head>`
 )

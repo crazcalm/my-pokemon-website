@@ -2,15 +2,22 @@ package pages
 
 import (
 	"testing"
-	"bytes"
+	"strings"
 )
 
 func TestGetSearchPage(t *testing.T) {
-	page, content := GetSearchPage()
+	prefix := "<html lang=\"en\">"
+	suffix := "</html>"
 
-	b := new(bytes.Buffer)
-	err := page.Execute(b, content)
-	if err != nil {
-		t.Errorf("Unexpected error: %s", err.Error())
+	page := GetSearchPage()
+
+	t.Logf("Search Page:\n%s", page)
+
+	if !strings.HasPrefix(page, prefix){
+		t.Errorf("Expected page to start with %s. See output\n%s", prefix, page)
+	}
+
+	if !strings.HasSuffix(page, suffix){
+		t.Errorf("Expected page to end with %s. See outout\n%s", suffix, page)
 	}
 }
