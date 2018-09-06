@@ -32,7 +32,7 @@ func GetHeadContent(title string, js, css []string) HeadContent {
 	if len(js) == 0 && len(css) == 0 && strings.EqualFold(title, "") {
 		return HeadContent{
 			"Test Title",
-			[]string{"/static/js/main.js", "testing2.js"},
+			[]string{"/static/js/main.js", "/static/js/testing.js"},
 			[]string{"/static/css/main.css", "testing2.css"},
 		}
 	}
