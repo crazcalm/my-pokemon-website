@@ -9,7 +9,7 @@ const (
   <nav>
     <ul>
     {{range .Links}}
-      <li><a href="{{.Link}}">{{.Text}}</li>
+      <li><a href="{{.Link}}">{{.Text}}</a></li>
     {{end}}
     </ul>
   </nav>
