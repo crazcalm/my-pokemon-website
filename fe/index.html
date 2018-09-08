@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Test Title</title>
+    <script type="text/javascript" src="/static/js/main.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css">
+  </head>
+  <header class="header">
+    <div class="logo">
+      <p>Logo goes here</p>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#">Link Text</a></li>
+        <li><a href="#">Link Text</a></li>
+      </ul>
+    </nav>
+  </header>
+  <body>
+  <form>
+    <input class="form_selector"  type="radio" name="supertypes" value="#pokemon_form">Pokemon
+    <input class="form_selector" type="radio" name="supertypes" value="#trainer_form">Trainer
+    <input class="form_selector" type="radio" name="supertypes" value="#energy_form">Energy
+    <fieldset id="energy_form">
+      <legend>Energy</legend>
+      Rarity: <select>
+      <option value=""></option>
+      <option value="common">Common</option>
+      <option value="uncommon">Uncommon</option>
+      <option value="rare">Rare</option>
+      <option value="rare holo">Rare Holo</option>
+      <option value="rare secret">Rare Secret</option>
+      <option value="rare ultra">Ultra Rare</option>
+      </select><br>
+      Special Energy: <input type="checkbox" value="subtype=special">
+    </fieldset>
+    
+    <fieldset id="trainer_form">
+      <legend>Trainer</legend> 
+      Name: <input type="text"><br>
+      Subtype: <select>
+      <option value="all">All</option>
+      <option value="item">Item</option>
+      <option value="stadium">Stadium</option>
+      <option value="supporter">Supporter</option>
+      <option value="pokemon tool">Pokemon Tool</option>
+      <option value="technical machine">Technical Machine</option>
+      </select><br>
+      Rarity: <select>
+      <option value=""></option>
+      <option value="common">Common</option>
+      <option value="uncommon">Uncommon</option>
+      <option value="rare">Rare</option>
+      <option value="rare holo">Rare Holo</option>
+      <option value="rare secret">Rare Secret</option>
+      <option value="rare ultra">Ultra Rare</option>
+      </select><br>
+      Set: --Add later
+      <button type="submit">Search</button>
+      
+    </fieldset>
+    
+    <fieldset id="pokemon_form">
+      <legend>Pokemon</legend>
+      Name: <input type="text"><br>
+      Subtype: <select>
+      <option value="all">All</option>
+      <option value="ex">EX</option>
+      <option value="level up">Level Up</option>
+      <option value="mega">Mega</option>
+      <option value="gx">GX</option>
+      <option value="basic">Basic</option>
+      <option value="stage 1">Stage 1</option>
+      <option value="stage 2">Stage 2</option>
+      </select><br>
+      HP: <select>
+      <option value="">Equal to</option>
+      <option value="gt">Greater than</option>
+      <option value="gte">Greater than or equal to</option>
+      <option value="lt">Less than</option>
+      <option value="lte">Less than or equal to</option>
+      </select><input type="number" min="0" max="500"><br>
+      Attack Damage: <input type="number" min="0" max="400" step="10"><br>
+      Attack Cost: <input type="number" min="0" max="5"><br>
+      Retreat Cost: <input type="number" min="0" max="5">
+    <fieldset>
+      <legend>Types</legend>
+      All <input type="checkbox" value="all" >
+      Fire <input type="checkbox" value="fire" >
+      Grass <input type="checkbox" value="grass" >
+      Water <input type="checkbox" value="water" >
+      Darkness <input type="checkbox" value="darkness">
+      Colorless <input type="checkbox" value="colorless">
+      Dragon <input type="checkbox" value="dragon">
+      Fairy <input type="checkbox" value="fairy">
+      Fighting <input type="checkbox" value="fighting">
+      Lightning <input type="checkbox" value="lightning">
+      Metal <input type="checkbox" value="metal">
+      Pyschic <input type="checkbox" value="pyschic">
+    </fieldset>
+    <fieldset>
+      <legend>Weaknesses</legend>
+      Fire <input type="checkbox" value="fire" >
+      Grass <input type="checkbox" value="grass" >
+      Water <input type="checkbox" value="water" >
+      Darkness <input type="checkbox" value="darkness">
+      Colorless <input type="checkbox" value="colorless">
+      Dragon <input type="checkbox" value="dragon">
+      Fairy <input type="checkbox" value="fairy">
+      Fighting <input type="checkbox" value="fighting">
+      Lightning <input type="checkbox" value="lightning">
+      Metal <input type="checkbox" value="metal">
+      Pyschic <input type="checkbox" value="pyschic">
+    </fieldset>
+    <fieldset>
+    <legend>Resistances</legend>
+      Fire <input type="checkbox" value="fire">
+      Grass <input type="checkbox" value="grass">
+      Water <input type="checkbox" value="water">
+      Darkness <input type="checkbox" value="darkness">
+      Colorless <input type="checkbox" value="colorless">
+      Dragon <input type="checkbox" value="dragon">
+      Fairy <input type="checkbox" value="fairy">
+      Fighting <input type="checkbox" value="fighting">
+      Lightning <input type="checkbox" value="lightning">
+      Metal <input type="checkbox" value="metal">
+      Pyschic <input type="checkbox" value="pyschic">
+    </fieldset>
+      Has Ability: <input type="checkbox" value="contains=ability"><br>
+      Rarity: <select>
+      <option value=""></option>
+      <option value="common">Common</option>
+      <option value="uncommon">Uncommon</option>
+      <option value="rare">Rare</option>
+      <option value="rare holo">Rare Holo</option>
+      <option value="rare secret">Rare Secret</option>
+      <option value="rare ultra">Ultra Rare</option>
+      </select><br>
+      Set: --Add later
+      <button type="submit">Search</button>
+      
+    </fieldset>
+    </form>
+  </body>
+  <footer>
+  <p>Footer text content</p>
+    <ol>
+      <li><a href="Link1"><img src="ImageSource1" alt="AltText1"/></li>
+      <li><a href="Link2"><img src="ImageSource2" alt="AltText2"/></li>
+    </ol>
+  </footer>
+</html>
