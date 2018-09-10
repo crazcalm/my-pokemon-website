@@ -17,10 +17,16 @@
     </nav>
   </header>
   <body>
+  <label for="basic_search">Search By Name:</label>
+  <input name="basic_search" type="text" placeholder="Name of Pokemon">
+  <a href="#" id="advance_search_toggle">Show Advance Search</a>
   <form>
-    <input class="form_selector"  type="radio" name="supertypes" value="#pokemon_form">Pokemon
-    <input class="form_selector" type="radio" name="supertypes" value="#trainer_form">Trainer
-    <input class="form_selector" type="radio" name="supertypes" value="#energy_form">Energy
+  	<div id="advance_form_select">
+      <input class="form_selector"  type="radio" name="supertypes" value="#pokemon_form">Pokemon
+      <input class="form_selector" type="radio" name="supertypes" value="#trainer_form">Trainer
+      <input class="form_selector" type="radio" name="supertypes" value="#energy_form">Energy
+	</div>
+
     <fieldset id="energy_form">
       <legend>Energy</legend>
       <label for="rarity">Rarity:</label>

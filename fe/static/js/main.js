@@ -1,6 +1,14 @@
 var app = {
 	init : function(){
+		//Hide the forms
 		this.callbacks.hideForms();
+
+		//TODO: refactor this
+		advanceSearch = document.querySelector("#advance_form_select");
+	  	advanceSearch.style.display = "none";
+
+		//Enable basic search
+		app.dom.forms.enableBasicSearch();
 
 		//radio button form selector callbacks
 		var ids = document.querySelectorAll(app.dom.forms.radioSelectorID);
@@ -13,9 +21,22 @@ var app = {
 		for (i=0; i<submitButtons.length; i++){
 			submitButtons[i].addEventListener("click", app.callbacks.submitForm);
 		}
+
+		//Advance search toggle
+		app.dom.body.advanceSearchElement().addEventListener("click", app.callbacks.toggleAdvanceSearch);
 	},
 
 	callbacks : {
+       toggleAdvanceSearch: function(){
+	  		advanceSearch = document.querySelector("#advance_form_select");
+	  		if (advanceSearch.style.display === "none"){
+	  			advanceSearch.style.display = "";
+	  			app.dom.forms.disableBasicSearch();
+	  		}else {
+	  			advanceSearch.style.display = "none";
+	  			app.dom.forms.enableBasicSearch();
+	  		}
+	  	},
 		hideForms : function(){
 			app.dom.forms.hideAll();
 		},
@@ -41,8 +62,29 @@ var app = {
 	},
 
 	dom : {
+	  body : {
+	  	advanceSearchElement : function(){
+	  		return document.querySelector("#advance_search_toggle");
+	  	}, 
+	  },
 
 	  forms: {
+	  	advanceSearchToggle : function(){
+	  		console.log("advanceSearchToggle");
+	  	},
+	  	basicSearch : function(){
+	  		return document.querySelector("input[name='basic_search']");
+	  	},
+	  	disableBasicSearch : function(){
+	  		var el = app.dom.forms.basicSearch();
+	  		el.setAttribute("disabled", true);
+	  		el.placeholder = "DISABLED";
+	  	},
+	  	enableBasicSearch : function(){
+	  		var el = app.dom.forms.basicSearch();
+	  		el.removeAttribute("disabled");
+	  		el.placeholder = "Name of Pokemon";
+	  	},
 	  	showAForm : function(box){
 			if (box.checked){
 				document.querySelector(box.value).style.display = "";

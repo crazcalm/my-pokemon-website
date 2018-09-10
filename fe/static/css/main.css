@@ -1,5 +1,5 @@
 body {
-	background: blue;
+	background: black;
 	color: yellow;
 	width: 90vw;
 	margin-left: 5vw;
@@ -33,7 +33,6 @@ header li {
 header li a {
 	padding-right: 5rem;
 }
-
 
 footer {
 	background-color: green;
