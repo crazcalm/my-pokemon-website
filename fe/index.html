@@ -23,7 +23,8 @@
     <input class="form_selector" type="radio" name="supertypes" value="#energy_form">Energy
     <fieldset id="energy_form">
       <legend>Energy</legend>
-      Rarity: <select>
+      <label for="rarity">Rarity:</label>
+      <select name="rarity">
       <option value=""></option>
       <option value="common">Common</option>
       <option value="uncommon">Uncommon</option>
@@ -32,13 +33,18 @@
       <option value="rare secret">Rare Secret</option>
       <option value="rare ultra">Ultra Rare</option>
       </select><br>
-      Special Energy: <input type="checkbox" value="subtype=special">
+      <label for="special_energy">Special Energy:</label>
+      <input type="checkbox" name="special_energy" value="subtype=special">
+      <br>
+      <button type="submit">Search</button>
     </fieldset>
     
     <fieldset id="trainer_form">
       <legend>Trainer</legend> 
-      Name: <input type="text"><br>
-      Subtype: <select>
+      <label for="name">Name:</label>
+      <input type="text" name="name"><br>
+      <label for="subtype">Subtype:</label>
+      <select name="subtype">
       <option value="all">All</option>
       <option value="item">Item</option>
       <option value="stadium">Stadium</option>
@@ -46,7 +52,8 @@
       <option value="pokemon tool">Pokemon Tool</option>
       <option value="technical machine">Technical Machine</option>
       </select><br>
-      Rarity: <select>
+      <label for="rarity">Rarity:</label>
+      <select name="rarity">
       <option value=""></option>
       <option value="common">Common</option>
       <option value="uncommon">Uncommon</option>
@@ -56,14 +63,17 @@
       <option value="rare ultra">Ultra Rare</option>
       </select><br>
       Set: --Add later
+      <br>
       <button type="submit">Search</button>
       
     </fieldset>
     
     <fieldset id="pokemon_form">
       <legend>Pokemon</legend>
-      Name: <input type="text"><br>
-      Subtype: <select>
+      <label for="name">Name:</label>
+      <input type="text" name="name"><br>
+      <label for="subtype">Subtype:</label>
+      <select name="subtype">
       <option value="all">All</option>
       <option value="ex">EX</option>
       <option value="level up">Level Up</option>
@@ -73,7 +83,8 @@
       <option value="stage 1">Stage 1</option>
       <option value="stage 2">Stage 2</option>
       </select><br>
-      HP: <select>
+      <label for="hp">HP:</label>
+      <select name="hp">
       <option value="">Equal to</option>
       <option value="gt">Greater than</option>
       <option value="gte">Greater than or equal to</option>
@@ -126,8 +137,10 @@
       Metal <input type="checkbox" value="metal">
       Pyschic <input type="checkbox" value="pyschic">
     </fieldset>
-      Has Ability: <input type="checkbox" value="contains=ability"><br>
-      Rarity: <select>
+      <label for="has_ability">Has Ability:</label>
+      <input type="checkbox" name="has_ability" value="contains=ability"><br>
+      <label for="rarity">Rarity:</label>
+      <select name="rarity">
       <option value=""></option>
       <option value="common">Common</option>
       <option value="uncommon">Uncommon</option>
@@ -137,6 +150,7 @@
       <option value="rare ultra">Ultra Rare</option>
       </select><br>
       Set: --Add later
+      <br>
       <button type="submit">Search</button>
       
     </fieldset>
