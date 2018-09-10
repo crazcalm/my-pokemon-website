@@ -1,4 +1,51 @@
-* {
+body {
 	background: blue;
 	color: yellow;
+	width: 90vw;
+	margin-left: 5vw;
+}
+
+header {
+	background-color: green;
+	width: inherit;
+	display: flex;
+}
+
+header .logo {
+	color: red;
+	width: 20vw;
+}
+
+header nav {
+	background-color: red;
+	width: 70vw;
+}
+
+header ul {
+	color: black;
+}
+
+header li {
+	display: inline;
+	float: right;
+}
+
+header li a {
+	padding-right: 5rem;
+}
+
+
+footer {
+	background-color: green;
+	width: inherit;
+	display: flex;
+}
+
+footer li {
+	display: inline;
+	float: right;
+}
+
+footer li a {
+	padding-right: 5rem;
 }
