@@ -29,8 +29,8 @@ var app = {
 		app.dom.body.modalElement().addEventListener("click", app.callbacks.hideModal);
 	},
 	ajax : {
-		basicSearch : function(name){
-			fetch('https://api.pokemontcg.io/v1/cards?name=' + name)
+		search : function(query){
+			fetch('https://api.pokemontcg.io/v1/' + query)
 			  .then(function(response) {
 			    return response.json();
 			  })
@@ -40,10 +40,13 @@ var app = {
 			    console.log(JSON.stringify(myJson));
 			    if (myJson.cards.length > 0){
 			    	app.dom.body.hideNoResults();
+			    	app.dom.body.deleteCards();
+			    	
 			    	for(var i=0; i<myJson.cards.length; i++){
 			    		app.dom.body.addCards(myJson.cards);
 			    	}
 			    }else {
+			    	app.dom.body.deleteCards();			    	
 			    	app.dom.body.showNoResults();
 			    }
 			});
@@ -63,9 +66,8 @@ var app = {
 	   	}
 	   },
 	   basicSearch : function(){
-	     app.dom.body.deleteCards();
 	   	 var name = app.dom.forms.getBasicSearchValue(); 
-	   	 app.ajax.basicSearch(name);
+	   	 app.ajax.search("cards?name=" + name);
 	   },
        toggleAdvanceSearch: function(){
 	  		advanceSearch = document.querySelector("#advance_form_select");
@@ -95,11 +97,11 @@ var app = {
 			console.log(e.target.parentNode.getAttribute("id"));
 			formID = e.target.parentNode.getAttribute("id");
 			if (formID === "energy_form"){
-				app.dom.forms.submitEnergyForm();
+				app.dom.forms.submitEnergyForm(e.target.parentNode);
 			}else if (formID === "pokemon_form"){
-				app.dom.forms.submitPokemonForm();
+				app.dom.forms.submitPokemonForm(e.target.parentNode);
 			}else if (formID === "trainer_form"){
-				app.dom.forms.submitTrainerForm();
+				app.dom.forms.submitTrainerForm(e.target.parentNode);
 			}
 			
 		},
@@ -218,14 +220,29 @@ var app = {
 				document.querySelector(id).removeAttribute("class");
 			});
 		},
-		submitEnergyForm : function(){
+		submitEnergyForm : function(form){
+			var query = "cards?supertype=energy";
 			console.log("energy form");
+			var rarity = form.querySelector("select").value;
+			if (rarity !== ""){
+				query+=rarity;
+			}
+			//special energy
+			var specialEnergy = form.querySelector("input").value;
+			if (form.querySelector("input").checked){
+				query += specialEnergy;
+			}
+			console.log(rarity, specialEnergy, query);
+
+			app.ajax.search(query);
 		},
-		submitPokemonForm : function(){
+		submitPokemonForm : function(e){
 			console.log("pokemone form");
+			console.log(e);
 		},
-		submitTrainerForm : function(){
+		submitTrainerForm : function(e){
 			console.log("trainer form");
+			console.log(e);
 		},
 	  },
 		
