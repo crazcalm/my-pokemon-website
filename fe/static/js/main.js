@@ -31,9 +31,11 @@ var app = {
 	  		advanceSearch = document.querySelector("#advance_form_select");
 	  		if (advanceSearch.style.display === "none"){
 	  			advanceSearch.style.display = "";
+	  			app.dom.body.hideAdvanceSearchText();
 	  			app.dom.forms.disableBasicSearch();
 	  		}else {
 	  			advanceSearch.style.display = "none";
+	  			app.dom.body.showAdvanceSearchText();
 	  			app.dom.forms.enableBasicSearch();
 	  		}
 	  	},
@@ -65,7 +67,13 @@ var app = {
 	  body : {
 	  	advanceSearchElement : function(){
 	  		return document.querySelector("#advance_search_toggle");
-	  	}, 
+	  	},
+	  	hideAdvanceSearchText : function(){
+	  		app.dom.body.advanceSearchElement().textContent = "Hide Advance Search"; 
+	  	},
+	  	showAdvanceSearchText : function(){
+	  		app.dom.body.advanceSearchElement().textContent = "Show Advance Search";
+	  	},
 	  },
 
 	  forms: {
