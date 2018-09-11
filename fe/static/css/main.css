@@ -68,10 +68,10 @@ section div.card img:hover{
 section div.modal {
 	background-color: grey;
 	max-height: 80vh;
-	position: absolute;
+	position: fixed;
 	left: 50vw;
 	transform: translateX(-50%);
-	display: none;
+	z-index: 3;
 }
 
 section div.modal img {
@@ -98,3 +98,8 @@ footer li a {
 }
 
 /*Footer Ends*/
+
+/*Extra*/
+.hide {
+	display: none;
+}

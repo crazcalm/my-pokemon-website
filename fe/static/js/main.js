@@ -1,9 +1,5 @@
 var app = {
 	init : function(){
-		//Stuff to hide
-		this.callbacks.hideForms();
-		app.dom.body.hideNoResults();
-
 		//TODO: refactor this
 		advanceSearch = document.querySelector("#advance_form_select");
 	  	advanceSearch.style.display = "none";
@@ -28,6 +24,9 @@ var app = {
 
 		//Basic search button
 		app.dom.forms.basicSearchButton().addEventListener("click", app.callbacks.basicSearch);
+
+		//hide modal
+		app.dom.body.modalElement().addEventListener("click", app.callbacks.hideModal);
 	},
 	ajax : {
 		basicSearch : function(name){
@@ -52,6 +51,17 @@ var app = {
 	},
 
 	callbacks : {
+	   hideModal : function(){
+	   	app.dom.body.hideModal();
+	   },
+	   showModal : function(e){
+	   	console.log(e.target);
+	   	if (e.target.parentNode.matches("div.card")){
+	   		var hires = e.target.parentNode.getAttribute("data-hires");
+	   		app.dom.body.newModal(hires);
+	   		app.dom.body.showModal();
+	   	}
+	   },
 	   basicSearch : function(){
 	     app.dom.body.deleteCards();
 	   	 var name = app.dom.forms.getBasicSearchValue(); 
@@ -104,16 +114,30 @@ var app = {
 	  		return document.querySelector("p.no_results");
 	  	},
 	  	hideNoResults : function(){
-	  		app.dom.body.noResultsElement().style.display = "none";
+	  		app.dom.body.noResultsElement().setAttribute("class", "no_results hide");
 	  	},
 	  	showNoResults: function(){
-	  		app.dom.body.noResultsElement().style.display = "";
+	  		app.dom.body.noResultsElement().setAttribute("class", "no_results");
 	  	},
 	  	hideAdvanceSearchText : function(){
 	  		app.dom.body.advanceSearchElement().textContent = "Hide Advance Search"; 
 	  	},
 	  	showAdvanceSearchText : function(){
 	  		app.dom.body.advanceSearchElement().textContent = "Show Advance Search";
+	  	},
+	  	modalElement : function(){
+	  		return document.querySelector("div.modal");
+	  	},
+	  	newModal : function(link){
+	  		var modal = app.dom.body.modalElement();
+	  		var img = modal.querySelector("img");
+	  		img.setAttribute("src", link);
+	  	},
+	  	showModal : function(){
+	  		app.dom.body.modalElement().setAttribute("class", "modal");
+	  	},
+	  	hideModal : function(){
+	  		app.dom.body.modalElement().setAttribute("class", "modal hide");
 	  	},
 	  	addCards : function(cards){
 			var container = document.querySelector("section.cards_container");
@@ -128,6 +152,9 @@ var app = {
 
 	  			div.appendChild(img);
 	  			container.appendChild(div);
+
+	  			//Add click event
+	  			div.addEventListener("click", app.callbacks.showModal);
 	  		}
 	  	},
 	  	deleteCards : function(){
@@ -173,9 +200,9 @@ var app = {
 	  	},
 	  	showAForm : function(box){
 			if (box.checked){
-				document.querySelector(box.value).style.display = "";
+				document.querySelector(box.value).removeAttribute("class");
 			}else{
-				document.querySelector(box.value).style.display = "none";
+				document.querySelector(box.value).setAttribute("class", "hide");
 			}
 	  	},
 		radioSelectorID : ".form_selector",
@@ -183,12 +210,12 @@ var app = {
 	    ids : ["#energy_form", "#pokemon_form", "#trainer_form"],
 		hideAll : function(){
 			this.ids.forEach(function(id){
-				document.querySelector(id).style.display = "none";
+				document.querySelector(id).setAttribute("class", "hide");
 			});
 		},
 		showAll : function(){
 			this.ids.forEach(function(id){
-				document.querySelector(id).style.display = "";
+				document.querySelector(id).removeAttribute("class");
 			});
 		},
 		submitEnergyForm : function(){

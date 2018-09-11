@@ -29,7 +29,7 @@
       <input class="form_selector" type="radio" name="supertypes" value="#energy_form">Energy
 	</div>
 
-    <fieldset id="energy_form">
+    <fieldset id="energy_form" class="hide">
       <legend>Energy</legend>
       <label for="rarity">Rarity:</label>
       <select name="rarity">
@@ -47,7 +47,7 @@
       <button type="submit">Search</button>
     </fieldset>
     
-    <fieldset id="trainer_form">
+    <fieldset id="trainer_form" class="hide">
       <legend>Trainer</legend> 
       <label for="name">Name:</label>
       <input type="text" name="name"><br>
@@ -76,7 +76,7 @@
       
     </fieldset>
     
-    <fieldset id="pokemon_form">
+    <fieldset id="pokemon_form" class="hide">
       <legend>Pokemon</legend>
       <label for="name">Name:</label>
       <input type="text" name="name"><br>
@@ -164,8 +164,8 @@
     </fieldset>
     </form>
     <section class="cards_container">
-      <p class="no_results">No results...</p>
-      <div class="modal">
+      <p class="no_results hide">No results...</p>
+      <div class="modal hide">
       	<img src="https://images.pokemontcg.io/xyp/XY122_hires.png">
       </div>
       <div class="card">
