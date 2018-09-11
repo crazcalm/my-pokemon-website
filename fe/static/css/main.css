@@ -5,6 +5,8 @@ body {
 	margin-left: 5vw;
 }
 
+/*Heading Start*/
+
 header {
 	background-color: green;
 	width: inherit;
@@ -34,6 +36,41 @@ header li a {
 	padding-right: 5rem;
 }
 
+/*Header End*/
+
+/*Content Starts*/
+section.cards_container {
+	background-color: pink;
+	width: inherit;
+}
+
+section p.no_results {
+	color: blue;
+	font-size: 3rem;
+	text-align: center;
+}
+
+section div.card{
+	display: inline-block;
+	padding: .5rem;
+}
+
+section div.modal {
+	background-color: grey;
+	max-height: 80vh;
+	position: absolute;
+	left: 50vw;
+	transform: translateX(-50%);
+	display: none;
+}
+
+section div.modal img {
+	max-height: inherit;
+}
+
+/*Content Ends*/
+
+/*Footer Starts*/
 footer {
 	background-color: green;
 	width: inherit;
@@ -48,3 +85,5 @@ footer li {
 footer li a {
 	padding-right: 5rem;
 }
+
+/*Footer Ends*/
