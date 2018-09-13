@@ -93,6 +93,8 @@ var app = {
 		},
 		submitForm : function(e){
 			e.preventDefault();
+			console.log(e.target);
+			console.log(e.target.parentNode);
 			console.log(e.target.parentNode.getAttribute("id"));
 			formID = e.target.parentNode.getAttribute("id");
 			if (formID === "energy_form"){
@@ -230,23 +232,69 @@ var app = {
 		},
 		submitEnergyForm : function(form){
 			var query = "cards?supertype=energy";
-			console.log("energy form");
+			
 			var rarity = form.querySelector("select").value;
 			if (rarity !== ""){
 				query+=rarity;
 			}
+			
 			//special energy
 			var specialEnergy = form.querySelector("input").value;
 			if (form.querySelector("input").checked){
 				query += specialEnergy;
 			}
-			console.log(rarity, specialEnergy, query);
-
 			app.ajax.search(query);
 		},
 		submitPokemonForm : function(form){
-			console.log("pokemone form");
-			console.log(form);
+		  console.log("start function");
+		  var query = "cards?supertype=pokemon";
+		  var name = form.querySelector("input[name='name']");
+		  if (name.value !== ""){
+		    query += "&name=" + name.value;
+		  }
+
+		  var basic_checkboxes = form.querySelectorAll(".basic_checkbox");
+		  for (var i=0; i < basic_checkboxes.length; i++){
+		    if (basic_checkboxes[i].checked){
+		      query += basic_checkboxes[i].value;
+		    }
+		  }
+
+		  var basic_selects = form.querySelectorAll(".basic_select");
+		  for (i=0; i<basic_selects.length; i++){
+		    console.log("select_value: "+ basic_selects[i].value);
+		    if (basic_selects[i].value !== ""){
+		      query += basic_selects[i].value;
+		    }
+		  }
+
+		  var basic_numbers = form.querySelectorAll(".basic_number");
+		  for (i=0; i<basic_numbers.length; i++){
+		    if(basic_numbers[i].value !== ""){
+		      query += "&" + basic_numbers[i].name + "=" + basic_numbers[i].value;
+		    }
+		  }
+
+		  var hp = form.querySelector("select[name='hp']");
+		  var hpValue = form.querySelector("select[name='hp'] + input");
+		  if (hp !== "" && hpValue !== ""){
+		    query += "&" + hp.value + hpValue.value;
+		  }
+
+		  var typeSection = form.querySelector("legend[name='types']");
+		  var typeValues = form.querySelectorAll("legend[name='types'] ~ input");
+		  console.log(typeSection, typeValues);
+
+		  var weaknessesSection = form.querySelector("legend[name='weaknesses']");
+		  var weaknessesValues = form.querySelectorAll("legend[name='weaknesses'] ~ input");
+      console.log(weaknessesSection, weaknessesValues);
+
+		  var resistancesSection = form.querySelector("legend[name='resistances']");
+		  var resistancesValues = form.querySelectorAll("legend[name='resistances'] ~ input");
+      console.log(resistancesSection, resistancesValues);
+		  
+			console.log("pokemon form");
+			console.log(query);
 		},
 		submitTrainerForm : function(form){
 		  var query = "cards?supertype=trainer";

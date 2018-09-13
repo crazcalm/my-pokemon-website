@@ -81,30 +81,34 @@
       <label for="name">Name:</label>
       <input type="text" name="name"><br>
       <label for="subtype">Subtype:</label>
-      <select name="subtype">
-      <option value="all">All</option>
-      <option value="ex">EX</option>
-      <option value="level up">Level Up</option>
-      <option value="mega">Mega</option>
-      <option value="gx">GX</option>
-      <option value="basic">Basic</option>
-      <option value="stage 1">Stage 1</option>
-      <option value="stage 2">Stage 2</option>
+      <select name="subtype" class="basic_select">
+      <option value="">All</option>
+      <option value="&subtype=ex">EX</option>
+      <option value="&subtype=level up">Level Up</option>
+      <option value="&subtype=mega">Mega</option>
+      <option value="&subtype=gx">GX</option>
+      <option value="&subtype=basic">Basic</option>
+      <option value="&subtype=stage 1">Stage 1</option>
+      <option value="&subtype=stage 2">Stage 2</option>
       </select><br>
       <label for="hp">HP:</label>
-      <select name="hp">
-      <option value="">Equal to</option>
-      <option value="gt">Greater than</option>
-      <option value="gte">Greater than or equal to</option>
-      <option value="lt">Less than</option>
-      <option value="lte">Less than or equal to</option>
+      <select name="hp" class="hp">
+      <option value=""></option>
+      <option value="&hp=">Equal to</option>
+      <option value="&hp=gt">Greater than</option>
+      <option value="&hp=gte">Greater than or equal to</option>
+      <option value="&hp=lt">Less than</option>
+      <option value="&hp=lte">Less than or equal to</option>
       </select><input type="number" min="0" max="500"><br>
-      Attack Damage: <input type="number" min="0" max="400" step="10"><br>
-      Attack Cost: <input type="number" min="0" max="5"><br>
-      Retreat Cost: <input type="number" min="0" max="5">
+      <label for="attackDamage">Attack Damage:</label>
+      <input name="attackDamage" class="basic_number" type="number" min="0" max="400" step="10"><br>
+      <label for="attackCost">Attack Cost:</label>
+      <input name="attackCost" class="basic_number" type="number" min="0" max="5"><br>
+      <label for="retreatCost">Retreat Cost:</label>
+      <input name="retreatCost" class="basic_number" type="number" min="0" max="5">
     <fieldset>
-      <legend>Types</legend>
-      All <input type="checkbox" value="all" >
+      <legend name ="types">Types</legend>
+      All <input type="checkbox" value="" >
       Fire <input type="checkbox" value="fire" >
       Grass <input type="checkbox" value="grass" >
       Water <input type="checkbox" value="water" >
@@ -118,7 +122,7 @@
       Pyschic <input type="checkbox" value="pyschic">
     </fieldset>
     <fieldset>
-      <legend>Weaknesses</legend>
+      <legend name="weaknesses">Weaknesses</legend>
       Fire <input type="checkbox" value="fire" >
       Grass <input type="checkbox" value="grass" >
       Water <input type="checkbox" value="water" >
@@ -132,7 +136,7 @@
       Pyschic <input type="checkbox" value="pyschic">
     </fieldset>
     <fieldset>
-    <legend>Resistances</legend>
+    <legend name="resistances">Resistances</legend>
       Fire <input type="checkbox" value="fire">
       Grass <input type="checkbox" value="grass">
       Water <input type="checkbox" value="water">
@@ -146,16 +150,16 @@
       Pyschic <input type="checkbox" value="pyschic">
     </fieldset>
       <label for="has_ability">Has Ability:</label>
-      <input type="checkbox" name="has_ability" value="contains=ability"><br>
+      <input type="checkbox" name="has_ability" value="&contains=ability" class="basic_checkbox"><br>
       <label for="rarity">Rarity:</label>
-      <select name="rarity">
+      <select name="rarity" class="basic_select">
       <option value=""></option>
-      <option value="common">Common</option>
-      <option value="uncommon">Uncommon</option>
-      <option value="rare">Rare</option>
-      <option value="rare holo">Rare Holo</option>
-      <option value="rare secret">Rare Secret</option>
-      <option value="rare ultra">Ultra Rare</option>
+      <option value="&rarity=common">Common</option>
+      <option value="&rarity=uncommon">Uncommon</option>
+      <option value="&rarity=rare">Rare</option>
+      <option value="&rarity=rare holo">Rare Holo</option>
+      <option value="&rarity=rare secret">Rare Secret</option>
+      <option value="&rarity=rare ultra">Ultra Rare</option>
       </select><br>
       Set: --Add later
       <br>
