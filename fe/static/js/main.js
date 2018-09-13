@@ -244,13 +244,26 @@ var app = {
 
 			app.ajax.search(query);
 		},
-		submitPokemonForm : function(e){
+		submitPokemonForm : function(form){
 			console.log("pokemone form");
-			console.log(e);
+			console.log(form);
 		},
-		submitTrainerForm : function(e){
+		submitTrainerForm : function(form){
+		  var query = "cards?supertype=trainer";
+		  var name = form.querySelector("input[name='name']");
+      if (name.value !== ""){
+        query += "&name=" + name.value;
+      }
+		  
+		  var selects = form.querySelectorAll("select");
+		  for (var i=0; i<selects.length; i++){
+		    if (selects[i].value !== ""){
+		      query += selects[i].value;
+		    }
+		  }
 			console.log("trainer form");
-			console.log(e);
+			console.log(form, name, selects, query);
+			app.ajax.search(query);
 		},
 	  },
 		
