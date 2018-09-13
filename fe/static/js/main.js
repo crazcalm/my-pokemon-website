@@ -1,9 +1,5 @@
 var app = {
 	init : function(){
-		//TODO: refactor this
-		advanceSearch = document.querySelector("#advance_form_select");
-	  	advanceSearch.style.display = "none";
-
 		//Enable basic search
 		app.dom.forms.enableBasicSearch();
 
@@ -35,6 +31,8 @@ var app = {
 			    return response.json();
 			  })
 			  .then(function(myJson) {
+          app.dom.body.hideModal();
+			  
 			  	console.log(myJson.cards[0]);
 			  	console.log(myJson.cards.length);
 			    console.log(JSON.stringify(myJson));
@@ -70,14 +68,15 @@ var app = {
 	   	 app.ajax.search("cards?name=" + name);
 	   },
        toggleAdvanceSearch: function(){
-	  		advanceSearch = document.querySelector("#advance_form_select");
-	  		if (advanceSearch.style.display === "none"){
-	  			advanceSearch.style.display = "";
+	  		advanceSearch = app.dom.body.advanceSearchFormSelector();
+	  		if (advanceSearch.getAttribute("class") === "hide"){
+	  			app.dom.body.showAdvanceSearchFormSelector();
+
 	  			app.dom.body.hideAdvanceSearchText();
 	  			app.dom.forms.disableBasicSearch();
 	  			
 	  		}else {
-	  			advanceSearch.style.display = "none";
+	  			app.dom.body.hideAdvanceSearchFormSelector();
 	  			app.dom.body.showAdvanceSearchText();
 	  			app.dom.forms.enableBasicSearch();
 	  			app.dom.forms.hideAll();
@@ -111,6 +110,15 @@ var app = {
 	  body : {
 	  	advanceSearchElement : function(){
 	  		return document.querySelector("#advance_search_toggle");
+	  	},
+	  	advanceSearchFormSelector : function(){
+	  	  return document.querySelector("#advance_form_select");
+	  	},
+	  	showAdvanceSearchFormSelector : function(){
+	  	  app.dom.body.advanceSearchFormSelector().removeAttribute("class");
+	  	},
+	  	hideAdvanceSearchFormSelector: function(){
+	  	  app.dom.body.advanceSearchFormSelector().setAttribute("class", "hide");
 	  	},
 	  	noResultsElement : function(){
 	  		return document.querySelector("p.no_results");
