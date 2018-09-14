@@ -277,24 +277,46 @@ var app = {
 
 		  var hp = form.querySelector("select[name='hp']");
 		  var hpValue = form.querySelector("select[name='hp'] + input");
-		  if (hp !== "" && hpValue !== ""){
+		  if (hp.value !== "" && hpValue.value !== ""){
 		    query += "&" + hp.value + hpValue.value;
 		  }
 
+      var _formatSectionData = function(section, values){
+        console.log(section, values);
+        var sectionName = section.getAttribute("name");
+        var data = "";
+
+        for (var i=0; i<values.length; i++){
+          console.log(values[i].checked);
+          if (values[i].checked){
+            if (data === ""){
+              data += values[i].value;
+            }else {
+              data += "|" + values[i].value;
+            }
+          }
+        }
+        if (data !== ""){
+          return "&"+sectionName + "=" + data;
+        }
+        return "";
+      };
+
 		  var typeSection = form.querySelector("legend[name='types']");
 		  var typeValues = form.querySelectorAll("legend[name='types'] ~ input");
-		  console.log(typeSection, typeValues);
+		  query += _formatSectionData(typeSection, typeValues);
 
 		  var weaknessesSection = form.querySelector("legend[name='weaknesses']");
 		  var weaknessesValues = form.querySelectorAll("legend[name='weaknesses'] ~ input");
-      console.log(weaknessesSection, weaknessesValues);
+      query += _formatSectionData(weaknessesSection, weaknessesValues);
 
 		  var resistancesSection = form.querySelector("legend[name='resistances']");
 		  var resistancesValues = form.querySelectorAll("legend[name='resistances'] ~ input");
-      console.log(resistancesSection, resistancesValues);
+      query += _formatSectionData(resistancesSection, resistancesValues);
 		  
 			console.log("pokemon form");
 			console.log(query);
+			app.ajax.search(query);
 		},
 		submitTrainerForm : function(form){
 		  var query = "cards?supertype=trainer";
