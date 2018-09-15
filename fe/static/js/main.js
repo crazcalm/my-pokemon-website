@@ -39,14 +39,11 @@ var app = {
 			    if (myJson.cards.length > 0){
 			    	app.dom.body.hideNoResults();
 			    	app.dom.body.deleteCards();
-			    	
-			    	for(var i=0; i<myJson.cards.length; i++){
-			    		app.dom.body.addCards(myJson.cards);
-			    	}
+			    	app.dom.body.addCards(myJson.cards);
 
             //hiding the form so that the cards are not pushed
             //too far down on the screen
-			    	app.callbacks.toggleAdvanceSearch();
+			    	app.dom.body.hideAdvnaceSearchForm();
 			    }else {
 			    	app.dom.body.deleteCards();			    	
 			    	app.dom.body.showNoResults();
@@ -74,18 +71,9 @@ var app = {
        toggleAdvanceSearch: function(){
 	  		advanceSearch = app.dom.body.advanceSearchFormSelector();
 	  		if (advanceSearch.getAttribute("class") === "hide"){
-	  			app.dom.body.showAdvanceSearchFormSelector();
-
-	  			app.dom.body.hideAdvanceSearchText();
-	  			app.dom.forms.disableBasicSearch();
-
-          //if a form is already selected, just show it
-	  			app.callbacks.showAForm();
+	  			app.dom.body.showAdvanceSearchForm();
 	  		}else {
-	  			app.dom.body.hideAdvanceSearchFormSelector();
-	  			app.dom.body.showAdvanceSearchText();
-	  			app.dom.forms.enableBasicSearch();
-	  			app.dom.forms.hideAll();
+	  			app.dom.body.hideAdvanceSearchForm();
 	  		}
 	  	},
 		hideForms : function(){
@@ -128,6 +116,22 @@ var app = {
 	  	hideAdvanceSearchFormSelector: function(){
 	  	  app.dom.body.advanceSearchFormSelector().setAttribute("class", "hide");
 	  	},
+	  	showAdvanceSearchForm: function(){
+	  	  advanceSearch = app.dom.body.advanceSearchFormSelector();
+	  	  app.dom.body.showAdvanceSearchFormSelector();
+	  	  app.dom.body.hideAdvanceSearchText();
+	  	  app.dom.forms.disableBasicSearch();
+	  	  
+	  	  //if a form is already selected, just show it
+	  	  app.callbacks.showAForm();
+	  	},
+	  	hideAdvanceSearchForm: function(){
+        advanceSearch = app.dom.body.advanceSearchFormSelector();
+	  	  app.dom.body.hideAdvanceSearchFormSelector();
+	  	  app.dom.body.showAdvanceSearchText();
+	  	  app.dom.forms.enableBasicSearch();
+	  	  app.dom.forms.hideAll();
+	  	},
 	  	noResultsElement : function(){
 	  		return document.querySelector("p.no_results");
 	  	},
@@ -158,8 +162,8 @@ var app = {
 	  		app.dom.body.modalElement().setAttribute("class", "modal hide");
 	  	},
 	  	addCards : function(cards){
-			var container = document.querySelector("section.cards_container");
-	  	
+			  var container = document.querySelector("section.cards_container");
+	  	  console.log("total cards: " + cards.length);
 	  		for (var i=0; i<cards.length; i++){
 	  			var div = document.createElement("div");
 	  			div.setAttribute("class", "card");
