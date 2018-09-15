@@ -43,6 +43,10 @@ var app = {
 			    	for(var i=0; i<myJson.cards.length; i++){
 			    		app.dom.body.addCards(myJson.cards);
 			    	}
+
+            //hiding the form so that the cards are not pushed
+            //too far down on the screen
+			    	app.callbacks.toggleAdvanceSearch();
 			    }else {
 			    	app.dom.body.deleteCards();			    	
 			    	app.dom.body.showNoResults();
@@ -74,7 +78,9 @@ var app = {
 
 	  			app.dom.body.hideAdvanceSearchText();
 	  			app.dom.forms.disableBasicSearch();
-	  			
+
+          //if a form is already selected, just show it
+	  			app.callbacks.showAForm();
 	  		}else {
 	  			app.dom.body.hideAdvanceSearchFormSelector();
 	  			app.dom.body.showAdvanceSearchText();

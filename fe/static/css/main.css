@@ -8,32 +8,38 @@ body {
 /*Heading Start*/
 
 header {
-	background-color: green;
 	width: inherit;
-	display: flex;
 }
 
-header .logo {
-	color: red;
-	width: 20vw;
+header h1 {
+	display: inline-block;
+	font-size: 2rem;
+	text-align: center;
+	margin-left: 50%;
+	transform: translateX(-50%);
 }
 
-header nav {
-	background-color: red;
-	width: 70vw;
+header h1::before {
+	content: "";
+	background: lightblue;
+	display: block;
+	width: 100%;
+	height:2rem;
+	position: absolute;
+	z-index: -1;
 }
 
-header ul {
-	color: black;
-}
-
-header li {
-	display: inline;
-	float: right;
-}
-
-header li a {
-	padding-right: 5rem;
+header h1::after {
+	content: '';
+	background: red;
+	display: block;
+	width: 90vw;
+	height: 2rem;
+	margin-left: 50%;
+	transform: translateX(-50%);
+	position: absolute;
+	z-index: -2;
+	top: 0;
 }
 
 /*Header End*/
