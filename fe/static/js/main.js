@@ -43,7 +43,7 @@ var app = {
 
             //hiding the form so that the cards are not pushed
             //too far down on the screen
-			    	app.dom.body.hideAdvnaceSearchForm();
+			    	app.dom.body.hideAdvanceSearchForm();
 			    }else {
 			    	app.dom.body.deleteCards();			    	
 			    	app.dom.body.showNoResults();
