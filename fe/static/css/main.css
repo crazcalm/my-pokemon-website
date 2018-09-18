@@ -107,6 +107,10 @@ footer {
 	color: whitesmoke;
 }
 
+footer p {
+	padding-left: 1rem;
+}
+
 footer li {
 	display: inline;
 	float: right;
