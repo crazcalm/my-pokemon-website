@@ -23,6 +23,9 @@ var app = {
 
 		//hide modal
 		app.dom.body.modalElement().addEventListener("click", app.callbacks.hideModal);
+
+		//Enter to do search
+		window.addEventListener("keypress", app.callbacks.searchOnEnter);
 	},
 	ajax : {
 		search : function(query){
@@ -65,6 +68,7 @@ var app = {
 	   	}
 	   },
 	   basicSearch : function(){
+	     console.log("basic search");
 	   	 var name = app.dom.forms.getBasicSearchValue(); 
 	   	 app.ajax.search("cards?name=" + name);
 	   },
@@ -91,15 +95,43 @@ var app = {
 			console.log(e.target.parentNode);
 			console.log(e.target.parentNode.getAttribute("id"));
 			formID = e.target.parentNode.getAttribute("id");
-			if (formID === "energy_form"){
-				app.dom.forms.submitEnergyForm(e.target.parentNode);
-			}else if (formID === "pokemon_form"){
-				app.dom.forms.submitPokemonForm(e.target.parentNode);
-			}else if (formID === "trainer_form"){
-				app.dom.forms.submitTrainerForm(e.target.parentNode);
-			}
-			
+
+      app.callbacks._submitForm(formID, e.target.parentNode);
 		},
+		_submitForm : function(formID, parentNode){
+			if (formID === "energy_form"){
+		    console.log("energy search");
+		  	app.dom.forms.submitEnergyForm(parentNode);
+		  }else if (formID === "pokemon_form"){
+		  	console.log("pokemon search");
+		  	app.dom.forms.submitPokemonForm(parentNode);
+		  }else if (formID === "trainer_form"){
+		  	console.log("trainer search");
+		  	app.dom.forms.submitTrainerForm(parentNode);
+		  }		  
+		},
+		searchOnEnter : function(e){
+		  console.log("search on enter");
+		  if (e.key === "Enter"){
+		    console.log("key is enter");
+		    var buttons = document.querySelectorAll("button[type='submit']");
+		    console.log(buttons);
+		    for (var i=buttons.length -1; i >= 0; i--){
+		      console.log(i);
+		      if (i === 0) {
+		        app.callbacks.basicSearch();
+		      }else{
+		        var button = buttons[i];
+		        console.log(button, button.parentNode.getAttribute("class"));
+		        if (button.parentNode.getAttribute("class") !== "hide") {
+		          console.log(button.parentNode);
+		          app.callbacks._submitForm(button.parentNode.getAttribute("id"), button.parentNode);
+		          return;
+		        }
+		      }
+		    }
+		  }
+		},		
 	},
 
 	dom : {
