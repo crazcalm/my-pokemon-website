@@ -114,21 +114,14 @@ var app = {
 		  console.log("search on enter");
 		  if (e.key === "Enter"){
 		    console.log("key is enter");
-		    var buttons = document.querySelectorAll("button[type='submit']");
-		    console.log(buttons);
-		    for (var i=buttons.length -1; i >= 0; i--){
-		      console.log(i);
-		      if (i === 0) {
-		        app.callbacks.basicSearch();
-		      }else{
-		        var button = buttons[i];
-		        console.log(button, button.parentNode.getAttribute("class"));
-		        if (button.parentNode.getAttribute("class") !== "hide") {
-		          console.log(button.parentNode);
-		          app.callbacks._submitForm(button.parentNode.getAttribute("id"), button.parentNode);
-		          return;
-		        }
-		      }
+		    var form = app.dom.forms.currentForm;
+		    console.log("form: ", form);
+		    if (form === null){
+		      app.callbacks.basicSearch();
+		    }else{
+		      var id = form.getAttribute("id");
+		      console.log("id: ", id);
+		      app.callbacks._submitForm(id, form);
 		    }
 		  }
 		},		
@@ -221,6 +214,7 @@ var app = {
 	  },
 
 	  forms: {
+	    currentForm : null,
 	  	advanceSearchToggle : function(){
 	  		console.log("advanceSearchToggle");
 	  	},
@@ -255,6 +249,9 @@ var app = {
 	  	showAForm : function(box){
 			if (box.checked){
 				document.querySelector(box.value).removeAttribute("class");
+
+				//Track current shown form
+				app.dom.forms.currentForm = document.querySelector(box.value);
 			}else{
 				document.querySelector(box.value).setAttribute("class", "hide");
 			}
@@ -265,7 +262,11 @@ var app = {
 		hideAll : function(){
 			this.ids.forEach(function(id){
 				document.querySelector(id).setAttribute("class", "hide");
+
 			});
+
+			//Track current viewed form
+			app.dom.forms.currentForm = null;
 		},
 		showAll : function(){
 			this.ids.forEach(function(id){
