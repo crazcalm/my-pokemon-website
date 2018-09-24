@@ -37,9 +37,6 @@
 			    .then(function(myJson) {
             app.dom.body.hideModal();
 
-			  	  console.log(myJson.cards[0]);
-			  	  console.log(myJson.cards.length);
-			      console.log(JSON.stringify(myJson));
 			      if (myJson.cards.length > 0){
 			    	  app.dom.body.hideNoResults();
 			    	  app.dom.body.deleteCards();
@@ -61,7 +58,6 @@
 	   	  app.dom.body.hideModal();
 	    },
 	    showModal : function(e){
-	   	  console.log(e.target);
 	   	  if (e.target.parentNode.matches("div.card")){
 	   		  var hires = e.target.parentNode.getAttribute("data-hires");
 	   		  app.dom.body.newModal(hires);
@@ -69,7 +65,6 @@
 	   	  }
 	    },
 	    basicSearch : function(){
-	      console.log("basic search");
 	   	  var name = app.dom.forms.getBasicSearchValue(); 
 	   	  app.ajax.search("cards?name=" + name);
 	    },
@@ -92,36 +87,26 @@
 		  },
 		  submitForm : function(e){
 			  e.preventDefault();
-			  console.log(e.target);
-			  console.log(e.target.parentNode);
-			  console.log(e.target.parentNode.getAttribute("id"));
 			  formID = e.target.parentNode.getAttribute("id");
 
         app.callbacks._submitForm(formID, e.target.parentNode);
 		  },
 		  _submitForm : function(formID, parentNode){
 			  if (formID === "energy_form"){
-		      console.log("energy search");
 		  	  app.dom.forms.submitEnergyForm(parentNode);
 		    }else if (formID === "pokemon_form"){
-		  	  console.log("pokemon search");
 		  	  app.dom.forms.submitPokemonForm(parentNode);
 		    }else if (formID === "trainer_form"){
-		  	  console.log("trainer search");
 		  	  app.dom.forms.submitTrainerForm(parentNode);
 		    }
   	  },
 		  searchOnEnter : function(e){
-		    console.log("search on enter");
 		    if (e.key === "Enter"){
-		      console.log("key is enter");
 		      var form = app.dom.forms.currentForm;
-		      console.log("form: ", form);
 		      if (form === null){
 		        app.callbacks.basicSearch();
 		      }else{
 		        var id = form.getAttribute("id");
-		        console.log("id: ", id);
 		        app.callbacks._submitForm(id, form);
 		      }
 		    }
@@ -189,7 +174,6 @@
 	  	  },
 	  	  addCards : function(cards){
 			    var container = document.querySelector("section.cards_container");
-	  	    console.log("total cards: " + cards.length);
 	  		  for (var i=0; i<cards.length; i++){
 	  			  var div = document.createElement("div");
 	  			  div.setAttribute("class", "card");
@@ -217,7 +201,6 @@
 	    forms: {
 	      currentForm : null,
 	  	  advanceSearchToggle : function(){
-	  		  console.log("advanceSearchToggle");
 	  	  },
 	  	  basicSearch : function(){
 	  		  return document.querySelector("input[name='basic_search']");
@@ -288,7 +271,6 @@
 			    app.ajax.search(query);
 		    },
 		    submitPokemonForm : function(form){
-		      console.log("start function");
 		      var query = "cards?supertype=pokemon";
 		      var name = form.querySelector("input[name='name']");
 		      if (name.value !== ""){
@@ -304,7 +286,6 @@
 
 		      var basic_selects = form.querySelectorAll(".basic_select");
 		      for (i=0; i<basic_selects.length; i++){
-		        console.log("select_value: "+ basic_selects[i].value);
 		        if (basic_selects[i].value !== ""){
 		          query += basic_selects[i].value;
 		        }
@@ -324,12 +305,10 @@
 		      }
 
           var _formatSectionData = function(section, values){
-            console.log(section, values);
             var sectionName = section.getAttribute("name");
             var data = "";
 
             for (var i=0; i<values.length; i++){
-              console.log(values[i].checked);
               if (values[i].checked){
                 if (data === ""){
                   data += values[i].value;
@@ -356,8 +335,6 @@
 		      var resistancesValues = form.querySelectorAll("legend[name='resistances'] ~ input");
           query += _formatSectionData(resistancesSection, resistancesValues);
 
-			    console.log("pokemon form");
-			    console.log(query);
 			    app.ajax.search(query);
 		    },
 		    submitTrainerForm : function(form){
@@ -373,8 +350,6 @@
 		          query += selects[i].value;
 		        }
 		      }
-			    console.log("trainer form");
-			    console.log(form, name, selects, query);
 			    app.ajax.search(query);
 		    },
 	    },
