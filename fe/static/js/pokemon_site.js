@@ -274,24 +274,24 @@
             query += '&name=' + name.value
           }
 
-          var basic_checkboxes = form.querySelectorAll('.basic_checkbox')
-          for (var i = 0; i < basic_checkboxes.length; i++) {
-            if (basic_checkboxes[i].checked) {
-              query += basic_checkboxes[i].value
+          var basicCheckboxes = form.querySelectorAll('.basic_checkbox')
+          for (var i = 0; i < basicCheckboxes.length; i++) {
+            if (basicCheckboxes[i].checked) {
+              query += basicCheckboxes[i].value
             }
           }
 
-          var basic_selects = form.querySelectorAll('.basic_select')
-          for (i = 0; i < basic_selects.length; i++) {
-            if (basic_selects[i].value !== '') {
-              query += basic_selects[i].value
+          var basicSelects = form.querySelectorAll('.basic_select')
+          for (i = 0; i < basicSelects.length; i++) {
+            if (basicSelects[i].value !== '') {
+              query += basicSelects[i].value
             }
           }
 
-          var basic_numbers = form.querySelectorAll('.basic_number')
-          for (i = 0; i < basic_numbers.length; i++) {
-            if (basic_numbers[i].value !== '') {
-              query += '&' + basic_numbers[i].name + '=' + basic_numbers[i].value
+          var basicNumbers = form.querySelectorAll('.basic_number')
+          for (i = 0; i < basicNumbers.length; i++) {
+            if (basicNumbers[i].value !== '') {
+              query += '&' + basicNumbers[i].name + '=' + basicNumbers[i].value
             }
           }
 
