@@ -2,7 +2,7 @@
 
 (function () {
   var app = {
-    init: function init () {
+    init() {
       // Enable basic search
       app.dom.forms.enableBasicSearch()
 
@@ -31,7 +31,7 @@
       window.addEventListener('keypress', app.callbacks.searchOnEnter)
     },
     ajax: {
-      search: function search (query) {
+      search(query) {
         fetch('https://api.pokemontcg.io/v1/' + query).then(function (response) {
           return response.json()
         }).then(function (myJson) {
@@ -54,21 +54,21 @@
     },
 
     callbacks: {
-      hideModal: function hideModal () {
+      hideModal() {
         app.dom.body.hideModal()
       },
-      showModal: function showModal (e) {
+      showModal (e) {
         if (e.target.parentNode.matches('div.card')) {
           var hires = e.target.parentNode.getAttribute('data-hires')
           app.dom.body.newModal(hires)
           app.dom.body.showModal()
         }
       },
-      basicSearch: function basicSearch () {
+      basicSearch() {
         var name = app.dom.forms.getBasicSearchValue()
         app.ajax.search('cards?name=' + name)
       },
-      toggleAdvanceSearch: function toggleAdvanceSearch () {
+      toggleAdvanceSearch() {
         var advanceSearch = app.dom.body.advanceSearchFormSelector()
         if (advanceSearch.getAttribute('class') === 'hide') {
           app.dom.body.showAdvanceSearchForm()
@@ -76,22 +76,22 @@
           app.dom.body.hideAdvanceSearchForm()
         }
       },
-      hideForms: function hideForms () {
+      hideForms () {
         app.dom.forms.hideAll()
       },
-      showAForm: function showAForm () {
+      showAForm() {
         var ids = document.querySelectorAll(app.dom.forms.radioSelectorID)
         for (var i = 0; i < ids.length; i++) {
           app.dom.forms.showAForm(ids[i])
         }
       },
-      submitForm: function submitForm (e) {
+      submitForm(e) {
         e.preventDefault()
         var formID = e.target.parentNode.getAttribute('id')
 
         app.callbacks._submitForm(formID, e.target.parentNode)
       },
-      _submitForm: function _submitForm (formID, parentNode) {
+      _submitForm(formID, parentNode) {
         if (formID === 'energy_form') {
           app.dom.forms.submitEnergyForm(parentNode)
         } else if (formID === 'pokemon_form') {
@@ -100,7 +100,7 @@
           app.dom.forms.submitTrainerForm(parentNode)
         }
       },
-      searchOnEnter: function searchOnEnter (e) {
+      searchOnEnter(e) {
         if (e.key === 'Enter') {
           var form = app.dom.forms.currentForm
           if (form === null) {
@@ -115,19 +115,19 @@
 
     dom: {
       body: {
-        advanceSearchElement: function advanceSearchElement () {
+        advanceSearchElement() {
           return document.querySelector('#advance_search_toggle')
         },
-        advanceSearchFormSelector: function advanceSearchFormSelector () {
+        advanceSearchFormSelector() {
           return document.querySelector('#advance_form_select')
         },
-        showAdvanceSearchFormSelector: function showAdvanceSearchFormSelector () {
+        showAdvanceSearchFormSelector() {
           app.dom.body.advanceSearchFormSelector().removeAttribute('class')
         },
-        hideAdvanceSearchFormSelector: function hideAdvanceSearchFormSelector () {
+        hideAdvanceSearchFormSelector() {
           app.dom.body.advanceSearchFormSelector().setAttribute('class', 'hide')
         },
-        showAdvanceSearchForm: function showAdvanceSearchForm () {
+        showAdvanceSearchForm() {
           app.dom.body.showAdvanceSearchFormSelector()
           app.dom.body.hideAdvanceSearchText()
           app.dom.forms.disableBasicSearch()
@@ -135,42 +135,42 @@
           // if a form is already selected, just show it
           app.callbacks.showAForm()
         },
-        hideAdvanceSearchForm: function hideAdvanceSearchForm () {
+        hideAdvanceSearchForm() {
           app.dom.body.hideAdvanceSearchFormSelector()
           app.dom.body.showAdvanceSearchText()
           app.dom.forms.enableBasicSearch()
           app.dom.forms.hideAll()
         },
-        noResultsElement: function noResultsElement () {
+        noResultsElement() {
           return document.querySelector('p.no_results')
         },
-        hideNoResults: function hideNoResults () {
+        hideNoResults() {
           app.dom.body.noResultsElement().setAttribute('class', 'no_results hide')
         },
-        showNoResults: function showNoResults () {
+        showNoResults() {
           app.dom.body.noResultsElement().setAttribute('class', 'no_results')
         },
-        hideAdvanceSearchText: function hideAdvanceSearchText () {
+        hideAdvanceSearchText() {
           app.dom.body.advanceSearchElement().textContent = 'Hide Advance Search'
         },
-        showAdvanceSearchText: function showAdvanceSearchText () {
+        showAdvanceSearchText() {
           app.dom.body.advanceSearchElement().textContent = 'Show Advance Search'
         },
-        modalElement: function modalElement () {
+        modalElement() {
           return document.querySelector('div.modal')
         },
-        newModal: function newModal (link) {
+        newModal(link) {
           var modal = app.dom.body.modalElement()
           var img = modal.querySelector('img')
           img.setAttribute('src', link)
         },
-        showModal: function showModal () {
+        showModal() {
           app.dom.body.modalElement().setAttribute('class', 'modal')
         },
-        hideModal: function hideModal () {
+        hideModal() {
           app.dom.body.modalElement().setAttribute('class', 'modal hide')
         },
-        addCards: function addCards (cards) {
+        addCards(cards) {
           var container = document.querySelector('section.cards_container')
           for (var i = 0; i < cards.length; i++) {
             var div = document.createElement('div')
@@ -187,7 +187,7 @@
             div.addEventListener('click', app.callbacks.showModal)
           }
         },
-        deleteCards: function deleteCards () {
+        deleteCards() {
           var nodes = document.querySelectorAll('div.card')
 
           for (var i = 0; i < nodes.length; i++) {
@@ -198,17 +198,16 @@
 
       forms: {
         currentForm: null,
-        advanceSearchToggle: function advanceSearchToggle () {},
-        basicSearch: function basicSearch () {
+        basicSearch() {
           return document.querySelector("input[name='basic_search']")
         },
-        basicSearchButton: function basicSearchButton () {
+        basicSearchButton() {
           return document.querySelector('#basic_search_button')
         },
-        getBasicSearchValue: function getBasicSearchValue () {
+        getBasicSearchValue() {
           return app.dom.forms.basicSearch().value
         },
-        disableBasicSearch: function disableBasicSearch () {
+        disableBasicSearch() {
           var el = app.dom.forms.basicSearch()
           el.setAttribute('disabled', true)
           el.placeholder = 'DISABLED'
@@ -218,7 +217,7 @@
           button.setAttribute('disabled', true)
           button.textContent = 'disabled'
         },
-        enableBasicSearch: function enableBasicSearch () {
+        enableBasicSearch() {
           var el = app.dom.forms.basicSearch()
           el.removeAttribute('disabled')
           el.placeholder = 'Name of Pokemon'
@@ -227,7 +226,7 @@
           button.removeAttribute('disabled')
           button.textContent = 'Search'
         },
-        showAForm: function showAForm (box) {
+        showAForm(box) {
           if (box.checked) {
             document.querySelector(box.value).removeAttribute('class')
 
@@ -240,7 +239,7 @@
         radioSelectorID: '.form_selector',
         submitButtons: 'form button',
         ids: ['#energy_form', '#pokemon_form', '#trainer_form'],
-        hideAll: function hideAll () {
+        hideAll() {
           this.ids.forEach(function (id) {
             document.querySelector(id).setAttribute('class', 'hide')
           })
@@ -252,7 +251,7 @@
             document.querySelector(id).removeAttribute('class')
           })
         },
-        submitEnergyForm: function submitEnergyForm (form) {
+        submitEnergyForm(form) {
           var query = 'cards?supertype=energy'
 
           var rarity = form.querySelector('select').value
@@ -267,7 +266,7 @@
           }
           app.ajax.search(query)
         },
-        submitPokemonForm: function submitPokemonForm (form) {
+        submitPokemonForm(form) {
           var query = 'cards?supertype=pokemon'
           var name = form.querySelector("input[name='name']")
           if (name.value !== '') {
@@ -301,7 +300,7 @@
             query += '&' + hp.value + hpValue.value
           }
 
-          var _formatSectionData = function _formatSectionData (section, values) {
+          var _formatSectionData = (section, values)=> {
             var sectionName = section.getAttribute('name')
             var data = ''
 
@@ -334,7 +333,7 @@
 
           app.ajax.search(query)
         },
-        submitTrainerForm: function submitTrainerForm (form) {
+        submitTrainerForm (form) {
           var query = 'cards?supertype=trainer'
           var name = form.querySelector("input[name='name']")
           if (name.value !== '') {

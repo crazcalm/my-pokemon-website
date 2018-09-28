@@ -30,6 +30,7 @@
       // Enter to do search
       window.addEventListener('keypress', app.callbacks.searchOnEnter);
     },
+
     ajax: {
       search: function search(query) {
         fetch('https://api.pokemontcg.io/v1/' + query).then(function (response) {
@@ -198,7 +199,6 @@
 
       forms: {
         currentForm: null,
-        advanceSearchToggle: function advanceSearchToggle() {},
         basicSearch: function basicSearch() {
           return document.querySelector("input[name='basic_search']");
         },
@@ -237,6 +237,7 @@
             document.querySelector(box.value).setAttribute('class', 'hide');
           }
         },
+
         radioSelectorID: '.form_selector',
         submitButtons: 'form button',
         ids: ['#energy_form', '#pokemon_form', '#trainer_form'],
@@ -247,6 +248,7 @@
           // Track current viewed form
           app.dom.forms.currentForm = null;
         },
+
         showAll: function showAll() {
           this.ids.forEach(function (id) {
             document.querySelector(id).removeAttribute('class');
