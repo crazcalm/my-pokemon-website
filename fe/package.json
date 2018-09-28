@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "babel static/js --out-dir static/babel",
-    "lint": "eslint static/js --fix"
+    "build": "babel static/babel --out-dir static/js",
+    "lint": "eslint static/babel --fix"
   },
   "keywords": [],
   "author": "",
