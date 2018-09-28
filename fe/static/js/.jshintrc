@@ -1,0 +1,10 @@
+{
+  "globalstrict": true,
+  "asi": true,
+  "browser": true,
+  "undef": true,
+  "unused": true,
+  "globals": {
+    "MY_GLOBAL": true
+  }
+}
